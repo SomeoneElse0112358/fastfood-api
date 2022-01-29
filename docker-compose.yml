@@ -1,0 +1,31 @@
+version: '3.5'
+services:
+  api:
+    container_name: fastfood-api
+    image: fastfood-api
+    command: npm start
+    restart: always
+    build: .
+    volumes:
+      - ./src:/fastfood-api/src
+    networks:
+      - common
+      - external
+    ports:
+      - '3001:3000'
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: fastfood-mongo
+    image: mongo
+    networks:
+      - common
+      - external
+    ports:
+      - 27022:27017
+networks:
+  common:
+    internal: true
+    name: ${COMMON_NETWORK_NAME}-common-network
+  external:

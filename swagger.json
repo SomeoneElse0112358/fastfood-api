@@ -1,0 +1,1382 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Fastfood API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "For local"
+    },
+    {
+      "url": "http://localhost",
+      "description": "For docker"
+    }
+  ],
+  "paths": {
+    "/api/admin/admins/": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Admins"],
+        "summary": "Find all admins",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, admins not found"
+          }
+        }
+      },
+      "post": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Admins"],
+        "summary": "Add new admin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Successfuly"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/admin/admins/{id}": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Admins"],
+        "summary": "Find the selected admin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter Admin's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, admin not found"
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Admins"],
+        "summary": "Delete the selected admin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter Admin's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model7Admin"
+                }
+              }
+            }
+          },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, admin not found"
+          }
+        }
+      },
+      "patch": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Admins"],
+        "summary": "Update the selected admin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter Admin's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Model0Admin"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model6Admin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, admin not found"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/admin/tags": {
+      "get": {
+        "tags": ["Admin-Tags"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find all tags",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, tags not found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Admin-Tags"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new tag",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Successfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model1Admin-Tags-Categories"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/admin/tags/{id}": {
+      "get": {
+        "tags": ["Admin-Tags"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter tag ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, tag not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin-Tags"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete the selected tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter tag ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, tag not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Admin-Tags"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Update the selected tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter tag ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, tag not found" }
+        }
+      }
+    },
+    "/api/admin/categories": {
+      "get": {
+        "tags": ["Admin-Categories"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find all categories",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, categories not found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Admin-Categories"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Successfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model1Admin-Tags-Categories"
+                }
+              }
+            }
+          },
+          "401": { "description": "Authentication failed" },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": { "description": "Access denied" }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/admin/categories/{id}": {
+      "get": {
+        "tags": ["Admin-Categories"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter category ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, category not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin-Categories"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete the selected category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter category ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, category not found" }
+        }
+      },
+      "patch": {
+        "tags": ["Admin-Categories"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Update the selected category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter category ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, category not found" }
+        }
+      }
+    },
+    "/api/admin/promocodes": {
+      "get": {
+        "tags": ["Admin-promocode"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the all promocodes",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, promocodes not found" }
+        }
+      },
+      "post": {
+        "tags": ["Admin-promocode"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new promocode",
+        "description": "Enter date in UTC",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "percent": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "finalDate": {
+                    "type": "string"
+                  },
+                  "numberOfUses": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "400": { "description": "Invalid input" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/admin/promocodes/{id}": {
+      "get": {
+        "tags": ["Admin-promocode"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected promocode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter promocode ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, promocode not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin-promocode"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete the selected promocode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter promocode ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, promocode not found" }
+        }
+      },
+      "patch": {
+        "tags": ["Admin-promocode"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Update the selected promocode",
+        "description": "Enter date in UTC",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter promocode ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "percent": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "finalDate": {
+                    "type": "string"
+                  },
+                  "numberOfUses": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "400": { "description": "Invalid input" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, promocode not found" }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "tags": ["Admin-User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the all users",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, users not found" }
+        }
+      },
+      "post": {
+        "tags": ["Admin-User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "adress": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "400": { "description": "Invalid input" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/admin/users/{id}": {
+      "get": {
+        "tags": ["Admin-User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, user not found" }
+        }
+      }
+    },
+    "/api/admin/upload/images": {
+      "post": {
+        "tags": ["Admin-Images"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Upload images",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "array",
+                    "items": { "type": "string", "format": "binary" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/admin/menu": {
+      "get": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find all dishes",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, dishes not found" }
+        }
+      },
+      "post": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new dish",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "discount": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/api/admin/menu/{id}": {
+      "get": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected dish",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter dish ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, dish not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete the selected dish",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter dish ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": {
+            "description": "Unfortunately, dish not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Update the selected dish",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter dish ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "discount": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "400": { "description": "Invalid input" },
+          "404": { "description": "Unfortunately, dish not found" }
+        }
+      }
+    },
+    "/api/admin/menu/dragndrop": {
+      "post": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Change dish position in category",
+        "description": "from, to and category must be valid mongo id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Enter category ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, dish not found" }
+        }
+      }
+    },
+    "/api/admin/menu/deletediscount/{id}": {
+      "patch": {
+        "tags": ["Admin-Menu"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete discount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter dish ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, dish not found" }
+        }
+      }
+    },
+    "/api/admin/orders": {
+      "get": {
+        "tags": ["Admin-Orders"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find orders",
+        "parameters": [
+          {
+            "name": "numberOfOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, orders not found" }
+        }
+      }
+    },
+    "/api/admin/orders/download/": {
+      "get": {
+        "tags": ["Admin-Orders"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Download excel file",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2021-11-03T11:35:05.982Z"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2021-11-03T14:37:35.469Z"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "tags": ["User-Categories"],
+        "summary": "Find all categories",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "404": { "description": "Unfortunately, categories not found" }
+        }
+      }
+    },
+    "/api/tags": {
+      "get": {
+        "tags": ["User-Tags"],
+        "summary": "Find all tags",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "404": { "description": "Unfortunately, tags not found" }
+        }
+      }
+    },
+    "/api/menu/": {
+      "get": {
+        "tags": ["User-Menu"],
+        "summary": "Find all dishes (filter)",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "404": { "description": "Unfortunately, dishes not found" }
+        }
+      }
+    },
+    "/api/menu/{link}": {
+      "get": {
+        "tags": ["User-Menu"],
+        "summary": "Find the selected dish",
+        "parameters": [
+          {
+            "name": "link",
+            "in": "path",
+            "description": "Enter dish link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "404": { "description": "Unfortunately, dish not found" }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find the selected user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, user not found" }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Delete the selected user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "404": { "description": "Unfortunately, user not found" },
+          "403": { "description": "Access denied" }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Update the selected user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "adress": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" },
+          "404": { "description": "Unfortunately, user not found" }
+        }
+      }
+    },
+    "/api/users/subscribe/{id}": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Subscribe to newsletter",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/users/unsubscribe/{id}": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter user's ID",
+            "required": true,
+            "schema": {
+              "maxLength": 24,
+              "minLength": 24,
+              "type": "string"
+            }
+          }
+        ],
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Unsubscribe from newsletter",
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": ["User-Orders"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Find orders",
+        "parameters": [
+          {
+            "name": "numberOfOrders",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "61646f3563f9099731c614a3"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successfuly" },
+          "401": { "description": "Authentication failed" },
+          "404": { "description": "Unfortunately, orders not found" },
+          "403": { "description": "Access denied" }
+        }
+      },
+      "post": {
+        "tags": ["User-Orders"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Create new order",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "dishes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "promocode": {
+                    "type": "string"
+                  },
+                  "usedBonuses": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "deliveryMethod": {
+                    "type": "string"
+                  },
+                  "timeOfDelivery": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": { "description": "Successfuly" },
+          "400": { "description": "Invalid input" },
+          "401": { "description": "Authentication failed" },
+          "403": { "description": "Access denied" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

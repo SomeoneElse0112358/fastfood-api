@@ -1,0 +1,47 @@
+{
+  "name": "fastfood-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "docker": "docker-compose up --build --detach"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SomeoneElse0112358/fastFood-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SomeoneElse0112358/fastFood-api/issues"
+  },
+  "homepage": "https://github.com/SomeoneElse0112358/fastFood-api#readme",
+  "dependencies": {
+    "auto-bind": "^4.0.0",
+    "awilix": "^6.0.0",
+    "aws-sdk": "^2.1011.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "envalid": "^7.2.1",
+    "express": "^4.17.1",
+    "express-validation": "^3.0.8",
+    "i": "^0.3.7",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongodb": "^4.1.2",
+    "mongoose": "^6.0.12",
+    "multer": "^1.4.3",
+    "multer-s3": "^2.10.0",
+    "nodemailer": "^6.7.1",
+    "npm": "^8.3.1",
+    "schema": "^0.2.1",
+    "slugify": "^1.6.1",
+    "swagger-ui-express": "^4.1.6",
+    "xlsx": "^0.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
