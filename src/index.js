@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const logger = require('morgan');
 const { ValidationError } = require('express-validation');
 const routes = require('./routes');
 const app = express();
@@ -14,6 +15,8 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => console.log(`Database has been connected...`));
+
+app.use(logger('common'));
 
 app.use(express.json());
 app.use(
